@@ -285,7 +285,7 @@ def predict_all_models(text):
 #                  STREAMLIT UI
 # ==========================================================
 
-st.set_page_config(page_title="AI Spam Detector", page_icon="📩", layout="centered")
+st.set_page_config(page_title="Spam Message Detector", page_icon="📩", layout="centered")
 
 # Styling
 st.markdown("""
@@ -297,21 +297,21 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-st.markdown('<div class="main-title">📩 AI Spam Detection Demo</div>', unsafe_allow_html=True)
+st.markdown('<div class="main-title">📩 Spam Message Detection Demo</div>', unsafe_allow_html=True)
 st.markdown('<div class="sub-text">Test one message across all four models and pick the most confident one.</div>', unsafe_allow_html=True)
 
 st.markdown("---")
 
-text = st.text_area("✍️ Enter a message to classify:", height=160)
+text = st.text_area(" Enter a message to classify:", height=160)
 
-if st.button("🚀 Classify Message", use_container_width=True):
+if st.button(" Classify Message", use_container_width=True):
     if not text.strip():
         st.warning("Please type a message first.")
     else:
         with st.spinner("Running all models..."):
             results = predict_all_models(text)
 
-        st.subheader("📊 Model Results")
+        st.subheader(" Model Results")
 
         for name, pred, conf, probs in results:
             st.markdown(f"<div class='result-box'>", unsafe_allow_html=True)
@@ -324,7 +324,7 @@ if st.button("🚀 Classify Message", use_container_width=True):
         best = max(results, key=lambda x: x[2])
 
         st.markdown("<div class='winner'>", unsafe_allow_html=True)
-        st.markdown(f"## 🏆 Best Model: **{best[0]}**")
+        st.markdown(f"## Best Model: **{best[0]}**")
         st.write(f"Final Prediction: **{best[1]}**")
         st.write(f"Highest Confidence: **{best[2]:.4f}**")
         st.markdown("</div>", unsafe_allow_html=True)
